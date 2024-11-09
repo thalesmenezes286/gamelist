@@ -1,6 +1,7 @@
 package com.dev.gamelistapi.dto;
 
 import com.dev.gamelistapi.entities.Game;
+import com.dev.gamelistapi.projections.GameMinProjection;
 import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -10,7 +11,7 @@ public class GameMinDTO {
 
     private Long id;
     private String title;
-    private Integer gameYear;
+    private Integer year;
     private String imgUrl;
     private String shortDescription;
 
@@ -19,9 +20,18 @@ public class GameMinDTO {
     public GameMinDTO(Game entity) {
         this.id = entity.getId();
         this.title = entity.getTitle();
-        this.gameYear = entity.getGameYear();
+        this.year = entity.getYear();
         this.imgUrl = entity.getImgUrl();
         this.shortDescription = entity.getShortDescription();
+    }
+
+    public GameMinDTO(GameMinProjection projection)
+    {
+        this.id = projection.getId();
+        this.title = projection.getTitle();
+        this.year = projection.getYear();
+        this.imgUrl = projection.getImgUrl();
+        this.shortDescription = projection.getShortDescription();
     }
 
     public Long getId() {
@@ -32,8 +42,8 @@ public class GameMinDTO {
         return title;
     }
 
-    public Integer getGameYear() {
-        return gameYear;
+    public Integer getYear() {
+        return year;
     }
 
     public String getImgUrl() {
